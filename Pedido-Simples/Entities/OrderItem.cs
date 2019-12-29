@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-namespace Pedido_Simples.Entities
+﻿namespace Pedido_Simples.Entities
 {
     public class OrderItem
     {
