@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Globalization;
 namespace Pedido_Simples.Entities
 {
     public class Order
@@ -7,6 +9,19 @@ namespace Pedido_Simples.Entities
         public DateTime Moment { get; set; }
         public OrderStatus Status { get; set; }
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();
+        public Client Client { get; set; }
+
+        public Order()
+        {
+
+        }
+
+        public Order(DateTime moment, OrderStatus status, Client client)
+        {
+            Moment = moment;
+            Status = status;
+            Client = client;
+        }
 
         public void AddItem(OrderItem item)
         {
@@ -18,8 +33,31 @@ namespace Pedido_Simples.Entities
             Items.Remove(item);
         }
 
-        public Order()
+        public double Total()
         {
+            double sum = 0.0;
+
+            foreach(OrderItem item in Items)
+            {
+                sum += item.SubTotal();
+            }
+
+            return sum;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Order moment: " + Moment.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Order status: " + Status);
+            sb.AppendLine("Client: " + Client);
+            sb.AppendLine("Ordered items");
+            foreach(OrderItem item in Items)
+            {
+                sb.AppendLine(item.ToString());
+            }
+            sb.AppendLine("Total: $" + Total().ToString("F2", CultureInfo.InvariantCulture));
+            return sb.ToString();
         }
     }
 }

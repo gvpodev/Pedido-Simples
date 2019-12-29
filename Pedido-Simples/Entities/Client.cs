@@ -11,8 +11,20 @@ namespace Pedido_Simples.Entities
         {
         }
 
-        public Client(string name, string email, DateTime bithDate)
+        public Client(string name, string email, DateTime birthDate)
         {
+            Name = name;
+            Email = email;
+            BirthDate = birthDate;
+        }
+
+        public override string ToString()
+        {
+            return Name
+                + ", E-mail: "
+                + Email
+                + ", Birth date: "
+                + BirthDate.ToString("dd/MM/yyyy");
         }
     }
 }
