@@ -1,4 +1,5 @@
-﻿namespace Pedido_Simples.Entities
+﻿using System.Globalization;
+namespace Pedido_Simples.Entities
 {
     public class OrderItem
     {
@@ -20,6 +21,17 @@
         public double SubTotal()
         {
             return Quantity * Price;
+        }
+
+        public override string ToString()
+        {
+            return Product.Name
+                + " - Quantity: "
+                + Quantity
+                + " - Price: $"
+                + Price
+                + " - Subtotal: $"
+                + SubTotal().ToString("F2",CultureInfo.InvariantCulture);
         }
     }
 }

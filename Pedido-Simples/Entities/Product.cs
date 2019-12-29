@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 namespace Pedido_Simples.Entities
 {
     public class Product
@@ -14,6 +15,13 @@ namespace Pedido_Simples.Entities
         {
             Name = name;
             Price = price;
+        }
+
+        public override string ToString()
+        {
+            return Name
+                + " Price = $ "
+                + Price.ToString("F2", CultureInfo.InvariantCulture);
         }
     }
 }
